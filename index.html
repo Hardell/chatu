@@ -1,67 +1,317 @@
-<!DOCTYPE HTML>
-<!--
-	Miniport by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>ChatQ</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatQ - Slovenský portál</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.03) 0px,
+                    rgba(0,0,0,0.03) 2px,
+                    transparent 2px,
+                    transparent 4px
+                ),
+                linear-gradient(
+                    to bottom,
+                    #5a8aa8 0%,
+                    #8ab4c8 5px,
+                    #b8d4e4 20%,
+                    #d4e8f0 100%
+                );
+            color: #333;
+            line-height: 1.4;
+        }
+        a { color: #0055aa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
-		<!-- Home -->
-			<article id="top" class="wrapper style4">
-				<div class="container">
-					<div class="row">
-						<div class="col-4 col-5-large col-12-medium">
-							<span class="image fit invert"><img src="images/1.png" alt="" /></span>
-						</div>
-						<div class="col-8 col-7-large col-12-medium">
-							<header>
-								<h1>Vitaj na <strong>ChatQ</strong>.</h1>
-							</header>
-							<p>
-								Znova pracujem na obnove <strong>ChatuQ</strong>. <br>Backend(server) by mohol byt hotovy priblizne v maji. Frontent(web) neviem. Okolo maja by mohol byt nejaky beta test pre zaujemcov.<br> Momentalne pracujem na vsetkom sam. Ak mi chcete pomoct alebo pokecat, napiste.
-							</p>
-							<hr />
-							<p>
-								<a href="https://github.com/Hardell/ChatQ">Github</a> <br>
-								<a href="https://dev.azure.com/chatq/ChatQ/_workitems/recentlycompleted/">VSO Backlog - Hotove veci</a> <br>
-								<a href="https://dev.azure.com/chatq/ChatQ/_workitems/recentlyupdated/">VSO Backlog - Todo a vo vyvoji</a>
-								<h3>milan.zolota@gmail.com</h3>
-								<ul class="social">
-									<li><a href="https://www.facebook.com/Hardell/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="https://www.linkedin.com/in/milan-zolota/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-								</ul>
-							</p>
-							<hr />
-						</div>
-					</div>
-				</div>
-			</article>
+        /* Outer wrapper for side colors */
+        .page-wrapper {
+            max-width: 750px;
+            margin: 0 auto;
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.03) 0px,
+                    rgba(0,0,0,0.03) 2px,
+                    transparent 2px,
+                    transparent 4px
+                ),
+                #7CA2C9;
+            min-height: 100vh;
+            padding: 10px 0;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #ffffff;
+            overflow: hidden;
+        }
 
-		<!-- Contact -->
-			<article id="contact" class="wrapper">
-				<div class="container medium">
-					<footer>
-						<ul id="copyright">
-							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
-				</div>
-			</article>
+        /* Keyboard header */
+        .keyboard-header {
+            margin-left: -10px;
+            margin-right: -10px;
+            margin-top: -10px;
+        }
+        .keyboard-header img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: -11%;
+        }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        /* Main layout */
+        .main-layout { display: flex; gap: 8px; }
+        .left-sidebar { width: 140px; flex-shrink: 0; }
+        .main-content { flex: 1; min-width: 0; }
+        .right-sidebar { width: 150px; flex-shrink: 0; }
 
-	</body>
+        /* Box styling */
+        .box {
+            background: #B9D2E8;
+            border: 1px solid #8aa8c0;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .box-header {
+            background: linear-gradient(to bottom, #c0d0e0, #a8b8c8);
+            padding: 3px 8px;
+            font-weight: bold;
+            font-size: 10px;
+            border-bottom: 1px solid #9aaab8;
+            color: #000000;
+            color: #445566;
+        }
+        .box-content { padding: 8px; }
+
+        /* Login form */
+        .login-form input[type="text"],
+        .login-form input[type="password"],
+        .login-form select {
+            width: 100%;
+            padding: 3px 5px;
+            margin-bottom: 5px;
+            border: 1px solid #8899aa;
+            border-radius: 3px;
+            font-size: 10px;
+            background: #f8fafc;
+        }
+        .login-form label { font-size: 10px; display: block; margin-bottom: 2px; }
+        .login-btn {
+            background: linear-gradient(to bottom, #e0e8f0, #c0d0e0);
+            border: 1px solid #8899aa;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 10px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .login-btn:hover { background: linear-gradient(to bottom, #f0f8ff, #d0e0f0); }
+
+        /* Links section */
+        .links-list { font-size: 10px; }
+        .links-list a { display: block; margin-bottom: 3px; color: #0066cc; }
+
+        /* Vtip section */
+        .vtip-text { font-size: 10px; font-style: italic; }
+
+        /* Article preview */
+        .article-preview { display: flex; gap: 10px; margin-bottom: 10px; }
+        .article-img { width: 80px; height: 60px; border-radius: 4px; flex-shrink: 0; object-fit: cover; }
+        .article-content { flex: 1; }
+        .article-title { font-weight: bold; font-size: 12px; margin-bottom: 5px; }
+        .article-meta { font-size: 9px; color: #666; }
+        .article-text { font-size: 10px; margin-top: 5px; }
+
+        /* Historicky kalendar */
+        .history-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dotted #aabbcc; }
+        .history-item:last-child { border-bottom: none; }
+        .history-title { font-weight: bold; font-size: 10px; color: #cc6600; }
+        .history-date { font-size: 9px; color: #666; }
+        .history-text { font-size: 10px; }
+
+        /* Snar section */
+        .snar-text { font-size: 10px; line-height: 1.5; }
+        .snar-form { margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .snar-form input, .snar-form select {
+            padding: 3px 5px; border: 1px solid #8899aa;
+            border-radius: 3px; font-size: 10px;
+        }
+
+        /* Shoutbox */
+        .shoutbox { }
+        .shout-msg { margin-bottom: 2px; font-size: 12px; padding: 1px 0; line-height: 1.3; }
+        .shout-user { font-weight: bold; color: #cc0000; }
+        .shout-text { color: #333; }
+        .shout-prefix { color: #003366; }
+        .shout-green { color: #006600; font-style: italic; }
+        .shout-time { color: #999; font-size: 9px; }
+        .shout-input { display: flex; gap: 5px; margin-bottom: 10px; }
+        .shout-input input {
+            flex: 1; padding: 3px 5px; border: 1px solid #8899aa;
+            border-radius: 3px; font-size: 10px; background: #ffffcc;
+        }
+
+        /* Right sidebar sections */
+        .calendar-widget { font-size: 10px; }
+        .calendar-widget .date { font-size: 14px; font-weight: bold; color: #000000; }
+        .calendar-widget .info { margin-top: 5px; }
+
+        .weather-widget { font-size: 10px; }
+        .weather-icon { font-size: 20px; }
+
+        .help-links { font-size: 10px; }
+        .help-links a { display: block; margin-bottom: 3px; }
+        .disabled-link { display: block; margin-bottom: 3px; color: #999; cursor: default; }
+
+        /* Emoticons */
+        .emoticon { font-size: 12px; }
+
+        /* Rating */
+        .rating { font-size: 10px; color: #666; }
+        .stars { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Keyboard Header -->
+        <div class="keyboard-header">
+            <img src="images/top.png" alt="ChatQ">
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <div class="box">
+                    <div class="box-header">Prihlásenie</div>
+                    <div class="box-content">
+                        <form class="login-form">
+                            <label>login</label>
+                            <input type="text" name="login" disabled>
+                            <label>heslo</label>
+                            <input type="password" name="heslo" disabled>
+                            <button type="submit" class="login-btn" disabled>Prihlásiť</button>
+                        </form>
+                        <p style="font-size:9px; margin-top:8px; color:#999;">Registrácia</p>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header">Kontakt</div>
+                    <div class="box-content links-list">
+                        <a href="https://facebook.com/Hardell/">facebook.com/Hardell/</a>
+                        <p>milan.zolota@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header">Vtip</div>
+                    <div class="box-content">
+                        <p>Ako spoznáte černobilského starca? </p>
+                        <p>Podľa protónového čísla.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="box">
+                    <div class="box-header">Novinky</div>
+                    <div class="box-content">
+                        <div class="article-preview">
+                            <img class="article-img" src="images/qrcma.jpg" alt="Qrcma">
+                            <div class="article-content">
+                                <div class="article-title">ChatQ sa vracia s5!</div>
+                                <div class="article-meta">Autor: Admin | Publikované: 03. 02. 2026 04:01</div>
+                                <div class="article-text"><img src="images/415.gif">Slavnostne otvorenie sa bude konat v Qrcme<img src="images/415.gif"></div>
+                                <div class="article-meta">Počet videní: 99999</div>
+                                <div class="rating">Rating: <span class="stars">★★★★☆</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header">O čom sa práve vykrikuje</div>
+                    <div class="box-content shoutbox">
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ LUDIAAAAA <img src="images/8.gif"> poculi ste to?!?! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Kukinka zakričala:</span> <span class="shout-green">°^°co sa deje?? °^°</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ CHATQ SA VRACIA!!!! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Matusko zakričal:</span> <span class="shout-text">~* COZEEE?!?!?! *~</span></div>
+                        <div class="shout-msg"><span class="shout-user">Kukinka zakričala:</span> <span class="shout-green">°^°to si robis srandu <img src="images/171.gif"> °^°</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ nie nie je to pravda!! videl som to na vlastne oci! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Zuzanka zakričala:</span> <span class="shout-text">**ja to neverim kym to neuvidim <img src="images/41.gif"> **</span></div>
+                        <div class="shout-msg"><span class="shout-user">Matusko zakričal:</span> <span class="shout-text">~* kde si to videl?? daj link! *~</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ uz to programuju!! <img src="images/1.gif"> bude to presne ako predtym! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Kukinka zakričala:</span> <span class="shout-green">°^°omg omg omg <img src="images/61.gif"> toto je najlepsia sprava roka!! °^°</span></div>
+                        <div class="shout-msg"><span class="shout-user">Petransen zakričal:</span> <span class="shout-text">|| konecne!! uz som myslel ze to nikdy neuvidim <img src="images/157.gif"> ||</span></div>
+                        <div class="shout-msg"><span class="shout-user">Zuzanka zakričala:</span> <span class="shout-text">**pamatate si este svoje prezyvky?? <img src="images/37.gif">**</span></div>
+                        <div class="shout-msg"><span class="shout-user">Matusko zakričal:</span> <span class="shout-text">~* ja mam este stare smajliky ulozene <img src="images/44.gif"> *~</span></div>
+                        <div class="shout-msg"><span class="shout-user">Kukinka zakričala:</span> <span class="shout-green">°^°ja tiez!! mam celu zlozku <img src="images/41.gif"> °^°</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ vsetko co sa bude dat vraj bude obnovene! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Petransen zakričal:</span> <span class="shout-text">|| aj piskvorky?? <img src="images/41.gif"> ||</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ JASNE ze aj piskvorky!! to je zaklad! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Zuzanka zakričala:</span> <span class="shout-text">**idem volat vsetkym kamoskom <img src="images/415.gif"> **</span></div>
+                        <div class="shout-msg"><span class="shout-user">Matusko zakričal:</span> <span class="shout-text">~* ja idem na icq napisat partii <img src="images/41.gif"> *~</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ toto bude legendarne!! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Zuzanka zakričala:</span> <span class="shout-text">**kedy to spustia??**</span></div>
+                        <div class="shout-msg"><span class="shout-user">Drsjansen zakričal:</span> <span class="shout-prefix">.::[ vraj uz coskoro!! mame sledovat web kde bude zverejneny datum! ]::.​</span></div>
+                        <div class="shout-msg"><span class="shout-user">Matusko zakričal:</span> <span class="shout-text">~* nemozem sa dockat*~</span></div>
+                        <div class="shout-msg"><span class="shout-user">Kukinka zakričala:</span> <span class="shout-green">°^°ani ja!! budem tu sediet cely den °^°</span></div>
+                        <div class="shout-msg"><span class="shout-user">Petransen zakričal:</span> <span class="shout-text">|| ChatQ navzdy!!||</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <div class="box">
+                    <div class="box-header">Obrázok</div>
+                    <div class="box-content" style="text-align:center;">
+                        <img src="images/citygate.jpg" alt="Obrázok" style="width:100%; border-radius:4px;">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header">Kalendár</div>
+                    <div class="box-content calendar-widget">
+                        <div class="date" id="current-date"></div>
+                        <div class="info">deň: <strong id="current-day"></strong></div>
+                        <div style="margin-top:8px; font-size:9px;">
+                            Výrok na dnes:<br>
+                            Kto neskoro chodí na ChatQ, sám sebe škodí.<br>
+                            - Slovenské príslovie
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    (function() {
+                        const days = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'];
+                        const now = new Date();
+                        const day = String(now.getDate()).padStart(2, '0');
+                        const month = String(now.getMonth() + 1).padStart(2, '0');
+                        const year = now.getFullYear();
+                        document.getElementById('current-date').textContent = day + '.' + month + '.' + year;
+                        document.getElementById('current-day').textContent = days[now.getDay()];
+                    })();
+                </script>
+
+                <div class="box">
+                    <div class="box-header">Pomoc</div>
+                    <div class="box-content help-links">
+                        <span class="disabled-link">Pomoc k príkazom (.help)</span>
+                        <span class="disabled-link">Pravidlá (.rules)</span>
+                        <span class="disabled-link">Kódex (.kodex)</span>
+                        <span class="disabled-link">Užitočné tipy (.tip)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
